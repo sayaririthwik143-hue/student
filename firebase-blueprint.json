@@ -1,0 +1,65 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Stores student profile information and progress metrics.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "disciplineScore": { "type": "integer" },
+        "studyGoal": { "type": "string" },
+        "dailyTargetMinutes": { "type": "integer" },
+        "badges": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Task": {
+      "title": "Student Task",
+      "description": "A task assigned to or created by the student.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string", "enum": ["Homework", "Assignment", "Study", "Project", "Revision"] },
+        "priority": { "type": "string", "enum": ["High", "Medium", "Low"] },
+        "deadline": { "type": "string", "format": "date-time" },
+        "completed": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "category"]
+    },
+    "StudySession": {
+      "title": "Study Session",
+      "description": "A record of a focused study session.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "subject": { "type": "string" },
+        "durationMinutes": { "type": "integer" },
+        "mode": { "type": "string", "enum": ["Deep Study", "Revision", "Quick Practice"] },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "durationMinutes", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile data."
+    },
+    "/users/{userId}/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "User's tasks."
+    },
+    "/users/{userId}/studySessions/{sessionId}": {
+      "schema": "StudySession",
+      "description": "User's study session history."
+    }
+  }
+}

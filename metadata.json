@@ -1,0 +1,5 @@
+{
+  "name": "STUDY COMMAND – AI Student Task Manager",
+  "description": "An advanced student productivity app for Diploma CSE students in Telangana featuring AI tutoring, task management, and discipline tracking.",
+  "requestFramePermissions": ["camera", "microphone", "geolocation"]
+}
